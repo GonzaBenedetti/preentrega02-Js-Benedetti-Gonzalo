@@ -8,21 +8,40 @@ function Quehacer(titulo, fecha, descripcion) {
 
 const crearQuehacer = () => {
     let y = prompt(`Ingrese el titulo del quehacer:`);
+    while(y === ''){
+        alert(`Debe ingresar un valor. Vuelva a intenerlo`);        
+        y = prompt(`Ingrese el titulo del quehacer:`);
+    }
+    
     let x = prompt(`Ingrese la fecha:`);
+    while(x === ''){
+        alert(`Debe ingresar un valor. Vuelva a intenerlo`);
+        x = prompt(`Ingrese la fecha:`);
+    }
+    
     let z = prompt(`Ingrese la descripcion del quehacer:`);
+    while(z === ''){
+        alert(`Debe ingresar un valor. Vuelva a intenerlo`);
+        z = prompt(`Ingrese la descripcion del quehacer:`);
+    }
+    
 
     let nuevoQuehacer = new Quehacer(y, x, z);
     lista.push(nuevoQuehacer);
 }
 
 const eliminarQuehacer = () => {
-    let index = Number(prompt(`Seleccione el indice a eliminar`)) - 1;
-
-    if (index >= 0 && index < lista.length) {
-        let eliminar = lista.splice(index, 1);
-        alert(`La tarea ${eliminar[0].titulo} ha sido eliminada.`);
-    } else {
-        alert(`El indice no es valido. Vuelve a intentar.`);
+    if (lista.length === 0) {
+        alert(`No hay ninguna tarea guardada. Comience a crear sus listas de tareas ahora mismo.`)
+    }else {
+        let index = Number(prompt(`Seleccione el indice a eliminar`)) - 1;
+    
+        if (index >= 0 && index < lista.length) {
+            let eliminar = lista.splice(index, 1);
+            alert(`La tarea ${eliminar[0].titulo} ha sido eliminada.`);
+        } else {
+            alert(`El indice no es valido. Vuelve a intentar.`);
+        }
     }
 }
 
@@ -30,12 +49,13 @@ const mostrarQuehaceres = () => {
     if (lista.length > 0) {
         for (let index = 0; index < lista.length; index += 1) {
             alert(`
-                ${index + 1} - TITULO: ${lista[index].titulo}           FECHA: ${lista[index].fecha}.
-                Su descripcion es: ${lista[index].descripcion}.
+                ${index + 1} - TITULO: ${lista[index].titulo}           FECHA: ${lista[index].fecha}
+                Descripcion: 
+                ${lista[index].descripcion}
             `);
         }
     } else {
-        alert(`No hay ninguna lista guardada. Comienza ahora mismo.`);
+        alert(`No hay ninguna tarea guardada. Comience a crear sus listas de tareas ahora mismo.`);
     }
 }
 
@@ -61,7 +81,7 @@ const ejecutarPrograma = () => {
                 eliminarQuehacer();
                 break;
             default:
-                alert(`La opcion ingresada no es valida. Vuelva a intentarlo`);
+                alert(`La opcion ingresada no es valida. Vuelva a intentarlo.`);
                 break;
         }
         seleccionarOpcion();
